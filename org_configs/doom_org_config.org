@@ -1,0 +1,1502 @@
+# Created 2022-05-31 Tue 12:38
+#+options: author:nil prop:t
+#+title: Doom Config
+#+export_file_name: doom_org_config.org
+#+auto_tangle: t
+#+exclude_tags: noexport
+
+* Init
+:PROPERTIES:
+:header-args: :tangle ~/.doom.d/init.el
+:END:
+This file controls what Doom modules are enabled and what order they load
+in. Remember to run 'doom sync' after modifying it!
+
+NOTE Press 'SPC h d h' (or 'C-h d h' for non-vim users) to access Doom's
+     documentation. There you'll find a "Module Index" link where you'll find
+     a comprehensive list of Doom's modules and what flags they support.
+
+NOTE Move your cursor over a module's name (or its flags) and press 'K' (or
+     'C-c c k' for non-vim users) to view its documentation. This works on
+     flags as well (those symbols that start with a plus).
+
+Alternatively, press 'gd' (or 'C-c c d') on a module to browse its
+directory (for easy access to its source code).
+
+#+begin_src elisp
+;; init.el -*- lexical-binding: t; -*-
+(doom! :input
+       ;;chinese
+       ;;japanese
+       ;;layout            ; auie,ctsrnm is the superior home row
+
+       :completion
+       company           ; the ultimate code completion backend
+       ;;helm              ; the *other* search engine for love and life
+       ;;ido               ; the other *other* search engine...
+       ivy               ; a search engine for love and life
+
+       :ui
+       deft              ; notational velocity for Emacs
+       doom              ; what makes DOOM look the way it does
+       doom-dashboard    ; a nifty splash screen for Emacs
+       doom-quit         ; DOOM quit-message prompts when you quit Emacs
+       ;;(emoji +unicode)  ; 🙂
+       ;;fill-column       ; a `fill-column' indicator
+       hl-todo           ; highlight TODO/FIXME/NOTE/DEPRECATED/HACK/REVIEW
+       ;;hydra
+       ;;indent-guides     ; highlighted indent columns
+       ;;ligatures         ; ligatures and symbols to make your code pretty again
+       ;;minimap           ; show a map of the code on the side
+       modeline          ; snazzy, Atom-inspired modeline, plus API
+       ;;nav-flash         ; blink cursor line after big motions
+       ;;neotree           ; a project drawer, like NERDTree for vim
+       ophints           ; highlight the region an operation acts on
+       (popup +defaults)   ; tame sudden yet inevitable temporary windows
+       ;;tabs              ; a tab bar for Emacs
+       ;;treemacs          ; a project drawer, like neotree but cooler
+       ;;unicode           ; extended unicode support for various languages
+       vc-gutter         ; vcs diff in the fringe
+       vi-tilde-fringe   ; fringe tildes to mark beyond EOB
+       ;;window-select     ; visually switch windows
+       workspaces        ; tab emulation, persistence & separate workspaces
+       zen               ; distraction-free coding or writing
+
+       :editor
+       (evil +everywhere); come to the dark side, we have cookies
+       file-templates    ; auto-snippets for empty files
+       fold              ; (nigh) universal code folding
+       (format +onsave)  ; automated prettiness
+       ;;god               ; run Emacs commands without modifier keys
+       ;;lispy             ; vim for lisp, for people who don't like vim
+       ;;multiple-cursors  ; editing in many places at once
+       ;;objed             ; text object editing for the innocent
+       ;;parinfer          ; turn lisp into python, sort of
+       ;;rotate-text       ; cycle region at point between text candidates
+       snippets          ; my elves. They type so I don't have to
+       ;;word-wrap         ; soft wrapping with language-aware indent
+
+       :emacs
+       dired             ; making dired pretty [functional]
+       electric          ; smarter, keyword-based electric-indent
+       ;;ibuffer         ; interactive buffer management
+       undo              ; persistent, smarter undo for your inevitable mistakes
+       vc                ; version-control and Emacs, sitting in a tree
+
+       :term
+       ;;eshell            ; the elisp shell that works everywhere
+       ;;shell             ; simple shell REPL for Emacs
+       ;;term              ; basic terminal emulator for Emacs
+       vterm             ; the best terminal emulation in Emacs
+
+       :checkers
+       syntax              ; tasing you for every semicolon you forget
+       ;;(spell +flyspell +hunspell)             ; tasing you for misspelling mispelling
+       ;;grammar           ; tasing grammar mistake every you make
+
+       :tools
+       ;;ansible
+       ;;debugger          ; FIXME stepping through code, to help you add bugs
+       ;;direnv
+       ;;docker
+       ;;editorconfig      ; let someone else argue about tabs vs spaces
+       ;;ein               ; tame Jupyter notebooks with emacs
+       (eval +overlay)     ; run code, run (also, repls)
+       ;;gist              ; interacting with github gists
+       lookup              ; navigate your code and its documentation
+       ;;lsp
+       magit             ; a git porcelain for Emacs
+       ;;make              ; run make tasks from Emacs
+       ;;pass              ; password manager for nerds
+       pdf               ; pdf enhancements
+       ;;prodigy           ; FIXME managing external services & code builders
+       ;;rgb               ; creating color strings
+       ;;taskrunner        ; taskrunner for all your projects
+       ;;terraform         ; infrastructure as code
+       ;;tmux              ; an API for interacting with tmux
+       ;;upload            ; map local to remote projects via ssh/ftp
+
+       :os
+       ;;(:if IS-MAC macos)  ; improve compatibility with macOS
+       ;;tty               ; improve the terminal Emacs experience
+
+       :lang
+       ;;agda              ; types of types of types of types...
+       ;;cc                ; C/C++/Obj-C madness
+       ;;clojure           ; java with a lisp
+       ;;common-lisp       ; if you've seen one lisp, you've seen them all
+       ;;coq               ; proofs-as-programs
+       ;;crystal           ; ruby at the speed of c
+       ;;csharp            ; unity, .NET, and mono shenanigans
+       ;;data              ; config/data formats
+       ;;(dart +flutter)   ; paint ui and not much else
+       ;;elixir            ; erlang done right
+       ;;elm               ; care for a cup of TEA?
+       emacs-lisp        ; drown in parentheses
+       ;;erlang            ; an elegant language for a more civilized age
+       ;;ess               ; emacs speaks statistics
+       ;;faust             ; dsp, but you get to keep your soul
+       ;;fsharp            ; ML stands for Microsoft's Language
+       ;;fstar             ; (dependent) types and (monadic) effects and Z3
+       ;;gdscript          ; the language you waited for
+       ;;(go +lsp)         ; the hipster dialect
+       ;;(haskell +dante)  ; a language that's lazier than I am
+       ;;hy                ; readability of scheme w/ speed of python
+       ;;idris             ; a language you can depend on
+       json              ; At least it ain't XML
+       ;;(java +meghanada) ; the poster child for carpal tunnel syndrome
+       javascript        ; all(hope(abandon(ye(who(enter(here))))))
+       ;;julia             ; a better, faster MATLAB
+       ;;kotlin            ; a better, slicker Java(Script)
+       latex             ; writing papers in Emacs has never been so fun
+       ;;lean
+       ;;factor
+       ;;ledger            ; an accounting system in Emacs
+       ;;lua               ; one-based indices? one-based indices
+       markdown          ; writing docs for people to ignore
+       ;;nim               ; python + lisp at the speed of c
+       ;;nix               ; I hereby declare "nix geht mehr!"
+       ;;ocaml             ; an objective camel
+       (org +pandoc +noter
+            +roam2 +present +jupyter)               ; organize your plain life in plain text
+       ;;php               ; perl's insecure younger brother
+       ;;plantuml          ; diagrams for confusing people more
+       ;;purescript        ; javascript, but functional
+       python            ; beautiful is better than ugly
+       ;;qt                ; the 'cutest' gui framework ever
+       ;;racket            ; a DSL for DSLs
+       ;;raku              ; the artist formerly known as perl6
+       ;;rest              ; Emacs as a REST client
+       ;;rst               ; ReST in peace
+       ;;(ruby +rails)     ; 1.step {|i| p "Ruby is #{i.even? ? 'love' : 'life'}"}
+       ;;rust              ; Fe2O3.unwrap().unwrap().unwrap().unwrap()
+       ;;scala             ; java, but good
+       ;;scheme            ; a fully conniving family of lisps
+       sh                ; she sells {ba,z,fi}sh shells on the C xor
+       ;;sml
+       ;;solidity          ; do you need a blockchain? No.
+       ;;swift             ; who asked for emoji variables?
+       ;;terra             ; Earth and Moon in alignment for performance.
+       web               ; the tubes
+       yaml              ; JSON, but readable
+
+       :email
+       (mu4e +org)
+       ;;notmuch
+       ;;(wanderlust +gmail)
+
+       :app
+       ;;calendar
+       ;;irc               ; how neckbeards socialize
+       (rss +org)        ; emacs as an RSS reader
+       ;;twitter           ; twitter client https://twitter.com/vnought
+
+       :config
+       ;; literate
+       (default +bindings +smartparens))
+
+(provide 'init)
+;;; init ends here
+#+end_src
+* Config
+:PROPERTIES:
+:header-args: :tangle ~/.doom.d/config.el
+:END:
+** Lexical scoping
+#+begin_src elisp
+;;; ~/.doom.d/config.el -*- lexical-binding: t; -*-
+#+end_src
+** Personal variables
+#+begin_src elisp
+(setq user-full-name "Robin Duraz"
+      user-mail-address "robin.duraz@gmail.com")
+
+(setq auth-sources '(password-store)
+      auth-source-cache-expiry 86400) ; default is 7200 (2h)
+#+end_src
+** Simple settings
+#+begin_src elisp
+(setq-default delete-by-moving-to-trash t                      ; Delete files to trash
+              window-combination-resize t                      ; take new window space from all other windows (not just current)
+              x-stretch-cursor t)                              ; Stretch cursor to the glyph width
+
+(setq password-cache-expiry nil                   ; I can trust my computers ... can't I?
+      ;; scroll-preserve-screen-position 'always     ; Don't have `point' jump around
+      scroll-margin 2)                            ; It's nice to maintain a little margin
+(map! :desc "Select all" :nvi "C-a" #'mark-whole-buffer)
+#+end_src
+** Visual settings
+Doom exposes five (optional) variables for controlling fonts in Doom. Here
+are the three important ones:
+
+- `doom-font'
+- `doom-variable-pitch-font'
+- `doom-big-font' -- used for `doom-big-font-mode'; use this for
+  presentations or streaming.
+
+They all accept either a font-spec, font string ("Input Mono-12"), or xlfd
+font string. You generally only need these two:
+(setq doom-font (font-spec :family "monospace" :size 12 :weight 'semi-light)
+      doom-variable-pitch-font (font-spec :family "sans" :size 13))
+
+There are two ways to load a theme. Both assume the theme is installed and
+available. You can either set `doom-theme' or manually load a theme with the
+`load-theme' function. This is the default:
+(setq doom-theme 'doom-one)
+
+This determines the style of line numbers in effect. If set to `nil', line
+numbers are disabled. For relative line numbers, set this to `relative'.
+
+#+begin_src elisp
+(setq doom-theme 'doom-vibrant)
+;; (setq doom-font (font-spec :family "Hack" :size 14))
+(setq doom-font "Hack-14")
+(setq display-line-numbers-type t)
+(setq standard-indent 2)
+(setq process-connection-type nil)
+#+end_src
+
+Zen config
+#+begin_src elisp
+(setq +zen-text-scale 1.2
+      writeroom-border-width 10
+      writeroom-width 120)
+#+end_src
+
+Orange color modeline when buffer is modified
+#+begin_src emacs-lisp
+(custom-set-faces!
+  '(doom-modeline-buffer-modified :foreground "orange"))
+#+end_src
+
+** Config package
+Here are some additional functions/macros that could help you configure Doom:
+
+- `load!' for loading external *.el files relative to this one
+- `use-package!' for configuring packages
+- `after!' for running code after a package has loaded
+- `add-load-path!' for adding directories to the `load-path', relative to
+  this file. Emacs searches the `load-path' when you load packages with
+  `require' or `use-package'.
+- `map!' for binding new keys
+
+To get information about any of these functions/macros, move the cursor over
+the highlighted symbol at press 'K' (non-evil users must press 'C-c c k').
+This will open documentation for it, including demos of how they are used.
+
+You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
+they are implemented.
+*** Pdf tools
+#+begin_src elisp
+;; PDF install every update
+(use-package pdf-tools
+  :init
+  (pdf-tools-install))
+#+end_src
+*** alerts style
+#+begin_src emacs-lisp
+(use-package! alert
+  :custom alert-default-style 'libnotify
+  )
+#+end_src
+*** Org
+**** Global settings
+#+begin_src elisp
+(use-package! org
+  :init
+  (setq org-directory "~/notes/"
+      deft-directory org-directory
+      org-agenda-files '("~/notes/tasks.org" "~/notes/PhD_whatever.org")
+      org-use-property-inheritance t
+      org-log-done 'time
+      org-export-with-sub-superscripts '{}
+      org-icalendar-include-body nil))
+#+end_src
+Org Babel default headers args
+#+begin_src elisp
+(setq org-babel-default-header-args
+      '((:session . "none")
+        (:results . "replace")
+        (:exports . "code")
+        (:cache . "no")
+        (:noweb . "no")
+        (:hlines . "no")
+        (:tangle . "no")
+        (:comments . "no")))
+#+end_src
+
+Org todo keywords
+#+begin_src emacs-lisp
+(setq org-todo-keywords
+     '((sequence "TODO(t)" "PROJ(p)" "LOOP(l)" "STRT(s!)" "WAIT(w)" "NEXT(n)" "ONGOING(o!)" "REVIEW(r)" "FIXME(f)" "HOLD(h)" "IDEA(i)" "|" "DONE(d)" "KILL(k)")
+       (sequence "[ ](T)" "[-](S)" "[?](W)" "|" "[X](D)"))
+     org-todo-keyword-faces
+     '(("[-]"  . +org-todo-active)
+       ("STRT" . +org-todo-active)
+       ("[?]"  . +org-todo-onhold)
+       ("WAIT" . +org-todo-onhold)
+       ("HOLD" . +org-todo-onhold)
+       ("PROJ" . +org-todo-project)
+       ("NO"   . +org-todo-cancel)
+       ("KILL" . +org-todo-cancel)
+       ("FIXME" error bold)
+       ("REVIEW" font-lock-keyword-face bold)
+       ("NEXT" . "#ffc800")
+       ("ONGOING" . "#ff8c00")
+       ("IDEA" . "#99ffff"))
+     org-log-into-drawer t)
+#+end_src
+
+**** Visuals
+***** Headline Faces
+#+begin_src emacs-lisp
+(add-hook 'org-mode-hook #'+org-pretty-mode)
+(custom-set-faces!
+  '(outline-1 :weight extra-bold :height 1.25)
+  '(outline-2 :weight bold :height 1.15)
+  '(outline-3 :weight bold :height 1.12)
+  '(outline-4 :weight semi-bold :height 1.09)
+  '(outline-5 :weight semi-bold :height 1.06)
+  '(outline-6 :weight semi-bold :height 1.03)
+  '(outline-8 :weight semi-bold)
+  '(outline-9 :weight semi-bold))
+(custom-set-faces!
+  '(org-document-title :height 1.2))
+#+end_src
+***** Org superstar (nicer headings)
+#+begin_src emacs-lisp
+(use-package! org-superstar
+  :after org
+  :hook (org-mode . org-superstar-mode)
+  :init (setq org-superstar-headline-bullets-list '("◉" "○" "✸" "✤" "✜" "◆" "▶" "✿")
+              org-superstar-prettify-item-bullets t))
+#+end_src
+***** Weird stuff
+#+begin_src emacs-lisp
+(setq org-ellipsis " ▾ ")
+#+end_src
+***** Org priority colors
+#+begin_src emacs-lisp
+(setq org-hide-leading-stars t
+      org-priority-highest ?A
+      org-priority-lowest ?E
+      org-priority-faces
+      '((?A . 'all-the-icons-red)
+        (?B . 'all-the-icons-orange)
+        (?C . 'all-the-icons-yellow)
+        (?D . 'all-the-icons-green)
+        (?E . 'all-the-icons-blue)))
+#+end_src
+**** Capture templates
+#+begin_src emacs-lisp
+(use-package! doct
+  :commands doct)
+#+end_src
+
+#+begin_src elisp
+(after! org
+  (setq +org-capture-todo-file "~/notes/tasks.org"
+        +org-capture-phd-file "~/notes/PhD_whatever.org")
+  (setq org-capture-templates
+        (doct '(("Tasks" :keys "t"
+                   :file +org-capture-todo-file
+                   :prepend t
+                   :headline "General Tasks"
+                   :type entry
+                   :template ("* TODO %? %^G%{extra}"
+                              "%i %a")
+                   :children (("General Task" :keys "t"
+                               :extra "")
+                              ("Task with deadline" :keys "d"
+                               :extra "\nDEADLINE: %^{Deadline:}t")
+                              ("Scheduled Task" :keys "s"
+                               :extra "\nSCHEDULED: %^{Start time:}t")))
+                ("Scheduled stuff" :keys "s"
+                 :file +org-capture-todo-file
+                 :prepend t
+                 :headline "Scheduled"
+                 :type entry
+                 :template ("* %?"
+                            "SCHEDULED: %^{Date:}t"))
+                ("PhD" :keys "p"
+                 :file +org-capture-phd-file
+                 :type entry
+                 :headline "PhD Tasks"
+                 :children (("PhD Tasks" :keys "t"
+                            :prepend t
+                            :template ("* TODO %?"
+                                       "%i %a")
+                            :children (("General task" :keys "k"
+                                        :template ("* TODO %?"
+                                                   "%i %a"))
+                                       ("Task with deadline" :keys "d"
+                                        :template ("* TODO %?"
+                                                   "DEADLINE: %^{Deadline:}t"
+                                                   "%i %a"))
+                                       ("Scheduled Task" :keys "s"
+                                        :template ("* TODO %?"
+                                                   "SCHEDULED: %^{Start time:}t"))))
+                            ("Meetings" :keys "m"
+                             :headline "Meetings"
+                             :type entry
+                             :children (("Meeting" :keys "m"
+                                         :template ("* %?"
+                                                    "SCHEDULED: %^{Date:}T"))
+                                        ("Regular advancement meeting" :keys "r"
+                                         :headline "Regular advancement meetings"
+                                         :template ("* Regular advancement meeting"
+                                                    "SCHEDULED: %^{Date:}T"))
+                                         ))
+                            ("Formations" :keys "f"
+                             :headline "Formations / Conferences"
+                             :type entry
+                             :template ("* %?"
+                                        "SCHEDULED: %^{Date:}T"))
+                            ("Scheduled stuff" :keys "s"
+                             :headline "Scheduled"
+                             :template ("* %?"
+                                        "SCHEDULED: %^{Date:}t"))
+                            ("Ideas" :keys "i"
+                             :headline "Ideas"
+                             :type entry
+                             :template ("* IDEA %?"))))
+                ))))
+#+end_src
+**** Bibtex
+#+begin_src elisp
+(use-package! helm-bibtex
+  :init
+  (setq bibtex-dialect 'BibTeX
+        bibtex-completion-notes-template-multiple-files "${author-abbrev}: ${title}\n"
+        bibtex-completion-bibliography (directory-files
+                             (concat (getenv "HOME") "/notes/bibliography") t
+                             "^[A-Z|a-z].+.bib$")
+        bibtex-completion-library-path '("~/notes/pdfs/PhD/" "~/notes/pdfs/World_notes/")
+        bibtex-completion-notes-path org-directory
+        bibtex-completion-additional-search-fields '(keywords)
+        bibtex-completion-display-formats
+        '((article       . "${=has-pdf=:1}${=has-note=:1} ${year:4} ${author:36} ${title:*} ${journal:4}")
+          (inbook        . "${=has-pdf=:1}${=has-note=:1} ${year:4} ${author:36} ${title:*} ${chapter:3}")
+          (incollection  . "${=has-pdf=:1}${=has-note=:1} ${year:4} ${author:36} ${title:*} ${booktitle:4}")
+          (inproceedings . "${=has-pdf=:1}${=has-note=:1} ${year:4} ${author:36} ${title:*} ${booktitle:4}")
+          (t             . "${=has-pdf=:1}${=has-note=:1} ${year:4} ${author:36} ${title:*}"))
+        ;; bibtex-completion-pdf-open-function
+        ;; (lambda (fpath)
+        ;;   (call-process "evince" nil 0 nil fpath))
+        )
+  ;; (helm-delete-action-from-source "Edit notes" helm-source-bibtex)
+  ;; (helm-add-action-to-source "Edit notes" 'bibtex-completion-edit-notes helm-source-bibtex 0)
+  )
+#+end_src
+**** Org ref
+#+begin_src elisp
+(use-package! org-ref
+  :after org
+  :init
+  (setq bibtex-autokey-year-length 2
+        bibtex-autokey-name-year-separator ""
+        bibtex-autokey-year-title-separator "-"
+        bibtex-autokey-titleword-separator "_"
+        bibtex-autokey-titlewords 3
+        bibtex-autokey-titlewords-stretch 1
+        bibtex-autokey-titleword-length 5
+        )
+  )
+#+end_src
+***** Keybindings
+#+begin_src elisp
+(map! :leader
+      (:prefix-map ("n" . "notes")
+       :desc "Cite" "R" #'org-ref-insert-link))
+#+end_src
+**** Org ref Helm
+#+begin_src emacs-lisp
+(use-package org-ref-helm
+  :init
+  (setq org-ref-insert-link-function 'org-ref-insert-link-hydra/body
+        org-ref-insert-cite-function 'org-ref-cite-insert-helm
+        org-ref-insert-label-function 'org-ref-insert-label-link
+        org-ref-insert-ref-function 'org-ref-insert-ref-link
+        org-ref-cite-onclick-function (lambda (_) (org-ref-citation-hydra/body))))
+#+end_src
+****** Keybindings
+#+begin_src elisp
+(map! :leader
+      (:prefix-map ("s" . "search")
+       (:prefix ("h" . "Helm bibtex")
+        :desc "Helm bibtex" "b" #'helm-bibtex
+        :desc "Helm bibtex with local bib" "B" #'helm-bibtex-with-local-bibliography
+        :desc "Helm bibtex with notes" "n" #'helm-bibtex-with-notes)))
+#+end_src
+**** Org roam
+#+begin_src elisp
+(use-package! org-roam
+  :after org
+  :init (setq org-roam-v2-ack t)
+  :hook
+  (after-init . org-roam-db-autosync-mode)
+  :custom
+  (org-roam-directory (file-truename org-directory))
+  :config
+  (org-roam-bibtex-mode +1))
+
+(setq +org-roam-open-buffer-on-find-file nil)
+
+(setq org-roam-mode-section-functions
+      (list #'org-roam-backlinks-section
+            #'org-roam-reflinks-section
+            #'org-roam-unlinked-references-section))
+#+end_src
+***** Captures
+#+begin_src emacs-lisp
+(add-to-list 'org-roam-capture-templates
+             '("r" "bibliography reference" plain "\n- tags :: [[roam:Unreviewed papers]] %?"
+                :target
+                (file+head "${citekey}.org" "#+title: ${title}")
+                :unnarrowed t))
+#+end_src
+***** Keybindings
+#+begin_src elisp
+(map! :leader
+      (:prefix-map ("n" . "notes")
+       (:prefix ("r" . "roam")
+        :desc "Roam capture" "c" #'org-roam-capture
+        :desc "Add tag" "t" #'org-roam-tag-add
+        :desc "Add alias" "A" #'org-roam-alias-add
+        :desc "Orui graph" "g" #'org-roam-ui-open
+        :desc "Toggle roam buffer" "b" #'org-roam-buffer-toggle
+        :desc "Launch roam buffer" "B" #'org-roam-buffer-display-dedicated
+        :desc "Add ref" "r" #'org-roam-ref-add)))
+#+end_src
+***** Find node appearance formating
+#+begin_src elisp
+(cl-defmethod org-roam-node-directories ((node org-roam-node))
+  (if-let ((dirs (file-name-directory (file-relative-name (org-roam-node-file node) org-roam-directory))))
+      (format "(%s)" (car (f-split dirs)))
+    ""))
+(cl-defmethod org-roam-node-backlinkscount ((node org-roam-node))
+  (let* ((count (caar (org-roam-db-query
+                       [:select (funcall count source)
+                                :from links
+                                :where (= dest $s1)
+                                :and (= type "id")]
+                       (org-roam-node-id node)))))
+    (format "[%d]" count)))
+(setq org-roam-node-display-template "${tags:30} ${title:100} ${backlinkscount:6}")
+#+end_src
+***** Roam buffer appearance
+Other possibility
+#+begin_src emacs-lisp
+(add-to-list 'display-buffer-alist
+    '("\\*org-roam\\*"
+        (display-buffer-in-side-window)
+        (side . right)
+        (slot . 0)
+        (window-width . 0.25)
+        (preserve-size . (t nil))
+        (window-parameters . ((no-other-window . t)
+                              (no-delete-other-windows . t)))))
+#+end_src
+#+begin_src elisp
+(add-to-list 'display-buffer-alist
+             '("\\*org-roam\\*"
+               (display-buffer-in-direction)
+               (direction . right)
+               (window-width . 0.33)
+               (window-height . fit-window-to-buffer)))
+#+end_src
+**** Roam bibtex
+#+begin_src elisp
+(use-package! org-roam-bibtex
+  :after (org-roam helm-bibtex)
+  (require 'org-ref)
+  :config
+  (setq orb-note-actions-interface 'ivy
+        orb-insert-interface 'helm-bibtex))
+#+end_src
+***** Keybindings
+#+begin_src elisp
+(map! :leader
+      (:prefix-map ("n" . "notes")
+       (:prefix ("b" . "orb")
+        :desc "Actions" "a" #'orb-note-actions
+        :desc "Insert" "i" #'org-ref-insert-link
+        (:prefix ("b" . "Add bibtex entry")
+         :desc "arxiv" "a" #'arxiv-add-bibtex-entry
+         :desc "doi" "d" #'doi-add-bibtex-entry
+         :desc "pubmed" "p" #'pubmed-insert-bibtex-from-pmid))))
+#+end_src
+**** Org roam ui
+#+begin_src emacs-lisp
+(use-package! websocket
+    :after org-roam)
+
+(use-package! org-roam-ui
+    :after org-roam ;; or :after org
+    :commands org-roam-ui-open
+    :hook (org-roam . org-roam-ui-mode)
+    :config
+    (require 'org-roam)
+    (setq org-roam-ui-sync-theme t
+          org-roam-ui-follow t
+          org-roam-ui-update-on-save t
+          org-roam-ui-open-on-start nil)
+    )
+#+end_src
+***** Keydindings
+#+begin_src emacs-lisp
+(map! :leader
+      (:prefix-map ("n" . "notes")
+       (:prefix ("r" . "roam")
+        (:prefix ("G" . "Graph")
+         :desc "Local graph" "l" #'org-roam-ui-node-local
+         :desc "Node zoom" "z" #'org-roam-ui-node-zoom))))
+#+end_src
+**** roam ref protocol
+#+begin_src emacs-lisp
+(use-package! org-roam-protocol
+  :after org-roam
+  :config
+  (setq org-roam-capture-ref-templates 'org-roam-capture-templates)
+)
+#+end_src
+**** Org noter
+#+begin_src elisp
+(use-package! org-noter
+  :after org-roam
+  :config
+  (setq
+   ;; The WM can handle splits
+   org-noter-notes-window-location 'other-frame
+   ;; Please stop opening frames
+   org-noter-always-create-frame nil
+   ;; I want to see the whole file
+   org-noter-hide-other nil
+   ;; Everything is relative to the main notes file
+   org-noter-notes-search-path (list org-directory)))
+#+end_src
+**** Agenda
+***** Super agenda config
+Another try at keybinding for faster super agenda view
+Works !!
+#+begin_src emacs-lisp
+(defun org-super-agenda-phd-view ()
+   (interactive)
+   (org-agenda nil "cp")) ; where ! is a a custom-agenda-command key
+
+(defun org-super-agenda-normal-view ()
+   (interactive)
+   (org-agenda nil "cn")) ; where ! is a a custom-agenda-command key
+
+(defun org-super-agenda-full-view ()
+   (interactive)
+   (org-agenda nil "cf")) ; where ! is a a custom-agenda-command key
+
+(map! :leader
+      (:prefix ("a" . "Org super agenda")
+       :desc "PhD view" "p" #'org-super-agenda-phd-view
+       :desc "Normal view" "n" #'org-super-agenda-normal-view
+       :desc "Full agenda view" "f" #'org-super-agenda-full-view))
+#+end_src
+
+#+begin_src emacs-lisp
+(after! ox-icalendar
+  (add-to-list 'org-export-exclude-tags "ARCHIVE")
+  (setq org-icalendar-include-todo nil
+        org-icalendar-use-deadline '(event-if-not-todo)
+        org-icalendar-use-scheduled '(event-if-not-todo)
+        org-icalendar-combined-agenda-file "~/calendars/cal.ics"))
+#+end_src
+
+#+begin_src emacs-lisp
+(use-package! org-super-agenda
+  :after org-agenda
+  :init
+  (setq org-agenda-skip-scheduled-if-done t
+        org-agenda-skip-deadline-if-done t
+        org-agenda-include-deadlines t
+        org-agenda-skip-deadline-prewarning-if-scheduled t
+        org-agenda-show-all-dates nil
+        org-agenda-block-separator nil
+        org-deadline-warning-days 0
+        org-agenda-compact-blocks t
+        org-agenda-start-day nil ;; i.e. today
+        org-agenda-start-on-weekday nil)
+  (setq org-agenda-custom-commands
+        '(("c" . "Super view")
+          ("cp" "PhD view"
+           (
+            (agenda "Dated stuff" ((org-agenda-span 30)
+                        (org-super-agenda-groups
+                         '(
+                           (:name "Today"
+                            :and (:date today :tag "PhD")
+                            :order 1)
+                           ;; (:name "Due next three days"
+                           ;;  :deadline (before ,(org-read-date nil nil "+3d"))
+                           ;;  :order 2)
+                           ;; (:name "Due next week"
+                           ;;  :deadline (before ,(org-read-date nil nil "+1w"))
+                           ;;  :order 3)
+                           (:name "Something to do"
+                            :and (:deadline future :tag "PhD")
+                            :order 4)
+                           (:name "Nothing to do"
+                            :and (:scheduled future :tag "PhD")
+                            :order 5)
+                           (:discard (:anything t))
+                           ))))
+            (alltodo "Undated stuff" ((org-agenda-overriding-header "")
+                         (org-super-agenda-groups
+                          '(
+                            (:name "Important"
+                             :and (:priority>= "B" :tag "PhD")
+                             :order 1)
+                            (:name "Ongoing tasks"
+                             :and (:todo "ONGOING" :tag "PhD")
+                             :order 2)
+                            (:name "Next tasks"
+                             :and (:todo "NEXT" :tag "PhD")
+                             :order 3)
+                            (:name "Stuff to fix"
+                             :and (:todo "FIXME" :tag "PhD")
+                             :order 4)
+                           (:name "Past"
+                            :and (:tag "PhD" :deadline past :not(:todo "DONE"))
+                            :and (:tag "PhD" :scheduled past :not(:todo "DONE"))
+                            :order 7)
+                            (:name "PhD todos"
+                             :and (:tag "PhD" :todo "TODO" :not (:deadline future) :not (:scheduled future))
+                             :order 5)
+                            (:name "Overdue"
+                             :and (:deadline past :tag "PhD" :todo t)
+                             :order 7)
+                            (:name "PhD other"
+                             :tag "PhD"
+                             :order 6)
+                            (:discard (:not (:todo t) :not (:tag "PhD")))
+                            ))))))
+            ("cn" "normal view"
+             (
+              (alltodo "" ((org-agenda-overriding-header "")
+                           (org-super-agenda-groups
+                            '(
+                              (:name "Important"
+                               :and (:priority>= "B" :not (:tag "PhD"))
+                               :order 1)
+                              (:name "Overdue tasks"
+                               :and (:deadline past :not (:tag "PhD"))
+                               :and (:scheduled past :not (:tag "PhD"))
+                               :order 3)
+                              (:name "Today tasks"
+                               :and (:deadline today :not (:tag "PhD"))
+                               :and (:scheduled today :not (:tag "PhD"))
+                               :order 2)
+                              (:name "Timed tasks"
+                               :and (:deadline future :not (:tag "PhD"))
+                               :and (:scheduled future :not (:tag "PhD"))
+                               :order 5)
+                              (:name "Todos"
+                               :and (:todo "TODO" :not (:tag "PhD"))
+                               :order 9)
+                              (:discard (:not (:todo t) :tag "PhD"))
+                            ))))
+              ))
+          ("cf" "Full agenda view"
+           (
+            (agenda "Full agenda (3 months)" ((org-agenda-span 100)
+                        (org-super-agenda-groups
+                         '(
+                           (:name "Something to do"
+                            :deadline future
+                            :order 4)
+                           (:name "Nothing to do"
+                            :scheduled future
+                            :order 5)
+                           (:discard (:anything t))
+                           ))))))
+            ))
+  :config
+  (org-super-agenda-mode))
+#+end_src
+**** Deft
+#+begin_src elisp
+(use-package! deft
+  :after org
+  :config
+  (setq deft-directory org-directory
+        deft-recursive t
+        deft-strip-summary-regexp ":PROPERTIES:\n\\(.+\n\\)+:END:\n"
+        deft-use-filename-as-title t))
+#+end_src
+**** Beamer
+Keybinding to select environment
+#+begin_src emacs-lisp
+(map! :map org-mode-map :localleader
+      (:prefix-map ("B" . "Beamer")
+       :desc "Environment" "e" #'org-beamer-select-environment))
+#+end_src
+#+begin_src emacs-lisp
+(add-to-list 'org-latex-classes
+             '("clean_beamer"
+               "\\documentclass[presentation]{beamer}
+                [NO-DEFAULT-PACKAGES]
+                [NO-PACKAGES]
+                [NO-EXTRA]"
+               ("\\section{%s}" . "\\section*{%s}")
+               ("\\subsection{%s}" . "\\subsection*{%s}")
+               ("\\subsubsection{%s}" . "\\subsubsection*{%s}")))
+
+(add-to-list 'org-latex-classes
+             '("IEEEtran"
+               "\\documentclass{IEEEtran}
+\\usepackage{amsmath,amsfonts, amssymb}
+\\usepackage{algorithmic}
+\\usepackage{algorithm}
+\\usepackage{array}
+\\usepackage[caption=false,font=normalsize,labelfont=sf,textfont=sf]{subfig}
+\\usepackage{textcomp}
+\\usepackage{stfloats}
+\\usepackage{url}
+\\usepackage{verbatim}
+\\usepackage{graphicx}
+\\usepackage{xcolor}
+\\usepackage{cite}
+\\usepackage{multirow}
+\\usepackage{hyperref}
+[No-DEFAULT-PACKAGES]
+                "
+               ("\\section{%s}" . "\\section*{%s}")
+               ("\\subsection{%s}" . "\\subsection*{%s}")
+               ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+               ("\\paragraph{%s}" . "\\paragraph*{%s}")
+               ("\\subparagraph{%s}" . "\\subparagraph*{%s}"))
+)
+#+end_src
+
+*** Web mode
+#+begin_src elisp
+(add-to-list 'auto-mode-alist '("\\.jsx?$" . web-mode)) ;; auto-enable for .js/.jsx files
+
+(setq web-mode-content-types-alist '(("jsx" . "\\.js[x]?\\'")))
+
+;; Indents in web mode
+(defun web-mode-init-hook ()
+  "Hooks for Web mode.  Adjust indent."
+  (setq web-mode-markup-indent-offset 2)
+  (setq web-mode-code-indent-offset 2)
+  (setq web-mode-css-indent-offset 2)
+  (setq web-mode-script-padding 2)
+  (setq web-mode-attr-indent-offset 2)
+  (setq web-mode-enable-css-colorization t)
+  (setq web-mode-enable-auto-quoting nil)
+  (setq web-mode-enable-current-element-highlight t)
+
+  ;; Indent inline JS/CSS within HTML
+  ;; https://stackoverflow.com/a/36725155/3516664
+  (setq web-mode-script-padding 2)
+  (setq web-mode-style-padding 2)
+  (setq web-mode-block-padding 2))
+
+(add-hook 'web-mode-hook  'web-mode-init-hook)
+#+end_src
+**** Flycheck options
+#+begin_src elisp
+(require 'flycheck)
+
+(setq-default flycheck-disabled-checkers
+              (append flycheck-disabled-checkers
+                      '(javascript-jshint json-jsonlist)))
+
+;; Enable eslint checker for web-mode
+(flycheck-add-mode 'javascript-eslint 'web-mode)
+;; Enable flycheck globally
+(add-hook 'after-init-hook #'global-flycheck-mode)
+;; and for node modules
+(add-hook 'flycheck-mode-hook 'add-node-modules-path)
+
+;;prettier js for formatting when saving
+(defun web-mode-init-prettier-hook ()
+  (add-node-modules-path))
+
+(add-hook 'web-mode-hook  'web-mode-init-prettier-hook)
+#+end_src
+*** Org html export
+Fancier code blocks with correct bg, fg and highlighting colors
+#+begin_src elisp
+(defun my/org-inline-css-hook (exporter)
+  "Insert custom inline css to automatically set the
+background of code to whatever theme I'm using's background"
+  (when (eq exporter 'html)
+    (let* ((my-pre-bg (face-background 'default))
+           (my-pre-fg (face-foreground 'default)))
+      (setq
+       org-html-head-extra
+       (concat
+        org-html-head-extra
+        (format "<style type=\"text/css\">\n pre.src {background-color: %s; color: %s;}</style>\n"
+                my-pre-bg my-pre-fg))))))
+
+(add-hook 'org-export-before-processing-hook 'my/org-inline-css-hook)
+#+end_src
+*** Org auto latex preview
+#+begin_src emacs-lisp
+(use-package! org-fragtog
+  :hook (org-mode . org-fragtog-mode))
+#+end_src
+*** HOLD Better toc
+#+begin_src elisp
+;; (defadvice! org-html-toc-linked (depth info &optional scope)
+;;   "Build a table of contents.
+
+;; Just like `org-html-toc', except the header is a link to \"#\".
+
+;; DEPTH is an integer specifying the depth of the table.  INFO is
+;; a plist used as a communication channel.  Optional argument SCOPE
+;; is an element defining the scope of the table.  Return the table
+;; of contents as a string, or nil if it is empty."
+;;   :override #'org-html-toc
+;;   (let ((toc-entries
+;;          (mapcar (lambda (headline)
+;;                    (cons (org-html--format-toc-headline headline info)
+;;                          (org-export-get-relative-level headline info)))
+;;                  (org-export-collect-headlines info depth scope))))
+;;     (when toc-entries
+;;       (let ((toc (concat "<div id=\"text-table-of-contents\">"
+;;                          (org-html--toc-text toc-entries)
+;;                          "</div>\n")))
+;;         (if scope toc
+;;           (let ((outer-tag (if (org-html--html5-fancy-p info)
+;;                                "nav"
+;;                              "div")))
+;;             (concat (format "<%s id=\"table-of-contents\">\n" outer-tag)
+;;                     (let ((top-level (plist-get info :html-toplevel-hlevel)))
+;;                       (format "<h%d><a href=\"#\" style=\"color:inherit; text-decoration: none;\">%s</a></h%d>\n"
+;;                               top-level
+;;                               (org-html--translate "Table of Contents" info)
+;;                               top-level))
+;;                     toc
+;;                     (format "</%s>\n" outer-tag))))))))
+#+end_src
+*** Python package management
+#+begin_src emacs-lisp
+(use-package pipenv
+  :hook (python-mode . pipenv-mode)
+  :init
+  (setq
+   pipenv-projectile-after-switch-function #'pipenv-projectile-after-switch-extended))
+
+(use-package sphinx-doc
+  :hook (python-mode . sphinx-doc-mode))
+#+end_src
+*** RSS feed (elfeed +org)
+#+begin_src emacs-lisp
+(defun rkd/elfeed-show-starred ()
+  (interactive)
+  (bookmark-maybe-load-default-file)
+  (bookmark-jump "elfeed-starred"))
+
+(defun rkd/elfeed-show-papers-cyber ()
+  (interactive)
+  (bookmark-maybe-load-default-file)
+  (bookmark-jump "papers-cyber"))
+
+(defun rkd/elfeed-show-papers-ai()
+  (interactive)
+  (bookmark-maybe-load-default-file)
+  (bookmark-jump "papers-ai"))
+
+(defun rkd/elfeed-show-papers-ml()
+  (interactive)
+  (bookmark-maybe-load-default-file)
+  (bookmark-jump "papers-ml"))
+
+(defun rkd/elfeed-show-papers-it ()
+  (interactive)
+  (bookmark-maybe-load-default-file)
+  (bookmark-jump "papers-it"))
+
+(defun elfeed-toggle-junk ()
+  (interactive)
+  (elfeed-search-toggle-all 'junk)
+  (elfeed-search-toggle-all 'unread))
+
+
+(use-package! elfeed
+  :config
+  (setq browse-url-browser-function 'browse-url-firefox)
+  (setq elfeed-search-filter "@1-month-ago +unread -junk")
+  (defun elfeed-search-show-entry (entry)
+    "Display the currently selected item in a buffer."
+    (interactive (list (elfeed-search-selected :ignore-region)))
+    (require 'elfeed-show)
+    (when (elfeed-entry-p entry)
+      (elfeed-search-update-entry entry)
+      (unless elfeed-search-remain-on-entry (forward-line))
+      (elfeed-show-entry entry)))
+
+  (defun elfeed-search-browse-url (&optional use-generic-p)
+    "Visit the current entry in your browser using `browse-url'.
+If there is a prefix argument, visit the current entry in the
+browser defined by `browse-url-generic-program'."
+    (interactive "P")
+    (let ((buffer (current-buffer))
+          (entries (elfeed-search-selected)))
+      (cl-loop for entry in entries
+               when (elfeed-entry-link entry)
+               do (if use-generic-p
+                      (browse-url-generic it)
+                    (browse-url it)))
+      ;; `browse-url' could have switched to another buffer if eww or another
+      ;; internal browser is used, but the remainder of the functions needs to
+      ;; run in the elfeed buffer.
+      (with-current-buffer buffer
+        (mapc #'elfeed-search-update-entry entries)
+        (unless (or elfeed-search-remain-on-entry (use-region-p))
+          (forward-line)))))
+
+  (map! :localleader
+        :map elfeed-search-mode-map
+        :desc "Cyber papers" "c" #'rkd/elfeed-show-papers-cyber
+        :desc "AI papers" "a" #'rkd/elfeed-show-papers-ai
+        :desc "ML papers" "m" #'rkd/elfeed-show-papers-ml
+        :desc "Info Theory papers" "i" #'rkd/elfeed-show-papers-it
+        :desc "Starred articles" "s" #'rkd/elfeed-show-starred)
+  ;; (add-hook! 'elfeed-search-mode-hook #'elfeed-update)
+  (setq elfeed-search-remain-on-entry t)
+
+  (defalias 'elfeed-toggle-star
+    (elfeed-expose #'elfeed-search-toggle-all 'star))
+  (defalias 'elfeed-toggle-unread
+    (elfeed-expose #'elfeed-search-toggle-all 'unread))
+  (defface elfeed-search-starred-title-face
+    '((t :foreground "#f77"))
+    "Marks a starred Elfeed entry.")
+  (push '(star elfeed-search-starred-title-face) elfeed-search-face-alist)
+
+  (map! :map elfeed-show-mode-map
+        :desc "Quit entry" :nv "q" #'elfeed-goodies/delete-pane)
+  (map! :map elfeed-search-mode-map
+        :desc "Toggle junk" :nv "d" #'elfeed-toggle-junk
+        :desc "Toggle unread" :nv "u" #'elfeed-toggle-unread
+        :desc "Toggle star" :nv "S" #'elfeed-toggle-star))
+
+
+(map! :leader
+      (:prefix ("e". "Elfeed")
+       :desc "Elfeed" "o" #'elfeed
+       :desc "Elfeed update" "u" #'elfeed-update))
+#+end_src
+#+begin_src emacs-lisp
+(defun rkd/elfeed-print-entry (entry)
+  "Print ENTRY to the buffer."
+
+  (let* ((title (or (elfeed-meta entry :title) (elfeed-entry-title entry) ""))
+         (title-faces (elfeed-search--faces (elfeed-entry-tags entry)))
+         (feed (elfeed-entry-feed entry))
+         (feed-title
+          (when feed
+            (or (elfeed-meta feed :title) (elfeed-feed-title feed))))
+         (tags (mapcar #'symbol-name (elfeed-entry-tags entry)))
+         (tags-str (concat "[" (mapconcat 'identity tags ",") "]"))
+         (title-width (- (window-width) elfeed-goodies/feed-source-column-width
+                         elfeed-goodies/tag-column-width 4))
+         (title-column (elfeed-format-column
+                        title (elfeed-clamp
+                               elfeed-search-title-min-width
+                               title-width
+                               title-width)
+                        :left))
+         (tag-column (elfeed-format-column
+                      tags-str (elfeed-clamp (length tags-str)
+                                             elfeed-goodies/tag-column-width
+                                             elfeed-goodies/tag-column-width)
+                      :left))
+         (feed-column (elfeed-format-column
+                       feed-title (elfeed-clamp elfeed-goodies/feed-source-column-width
+                                                elfeed-goodies/feed-source-column-width
+                                                elfeed-goodies/feed-source-column-width)
+                       :left))
+         (score
+          (elfeed-score-format-score
+           (elfeed-score-scoring-get-score-from-entry entry))))
+
+    (if (>= (window-width) (* (frame-width) elfeed-goodies/wide-threshold))
+        (progn
+          (insert score)
+          (insert (propertize feed-column 'face 'elfeed-search-feed-face) " ")
+          (insert (propertize tag-column 'face 'elfeed-search-tag-face) " ")
+          (insert (propertize title 'face title-faces 'kbd-help title)))
+      (insert (propertize title 'face title-faces 'kbd-help title)))))
+
+(use-package! elfeed-score
+  :after elfeed elfeed-goodies
+  :config
+  (setq elfeed-score-serde-score-file "~/notes/elfeed-scores"
+        elfeed-search-print-entry-function #'rkd/elfeed-print-entry
+        elfeed-goodies/feed-source-column-width 12)
+  (map! :map elfeed-search-mode-map
+        :desc "Elfeed score mode" :nv "=" elfeed-score-map)
+)
+#+end_src
+*** Magit for bare repo
+#+begin_src emacs-lisp
+(defun ~/magit-process-environment (env)
+  "Add GIT_DIR and GIT_WORK_TREE to ENV when in a special directory.
+https://github.com/magit/magit/issues/460 (@cpitclaudel)."
+  (let ((default (file-name-as-directory (expand-file-name default-directory)))
+        (home (expand-file-name "~/")))
+    (when (string= default home)
+      (let ((gitdir (expand-file-name "~/.dotfiles")))
+        (push (format "GIT_WORK_TREE=%s" home) env)
+        (push (format "GIT_DIR=%s" gitdir) env))))
+  env)
+;; (defun ~/magit-process-environment (env)
+;;   "Add GIT_DIR and GIT_WORK_TREE to ENV when in a special directory.
+;; https://github.com/magit/magit/issues/460 (@cpitclaudel)."
+;;   (let ((default (file-name-as-directory (expand-file-name default-directory)))
+;;         (home (expand-file-name "~/"))
+;;         (privatedotfiles (expand-file-name "~/.dotfiles/"))
+;;         (publicdotfiles (expand-file-name "~/.dotfiles-public/")))
+;;     (when (string= default privatedotfiles)
+;;       (let ((gitdir (expand-file-name "~/.dotfiles")))
+;;         (push (format "GIT_WORK_TREE=%s" home) env)
+;;         (push (format "GIT_DIR=%s" gitdir) env)))
+;;     (when (string= default publicdotfiles)
+;;       (let ((gitdir (expand-file-name "~/.dotfiles-public")))
+;;         (push (format "GIT_WORK_TREE=%s" home) env)
+;;         (push (format "GIT_DIR=%s" gitdir) env))))
+;;   env)
+
+(advice-add 'magit-process-environment
+            :filter-return #'~/magit-process-environment)
+#+end_src
+** Tangle code blocks on hook
+#+begin_src emacs-lisp
+(use-package! org-auto-tangle
+  :defer t
+  :hook (org-mode . org-auto-tangle-mode))
+#+end_src
+
+The one above is a lot faster and doesn't block emacs
+#+begin_src elisp
+(after! org
+  (add-hook! 'org-mode-hook
+    (add-hook 'after-save-hook 'org-babel-tangle nil t)))
+#+end_src
+
+** Keybinding org babel detangle
+Used to edit and sync code files with source code blocks in org files
+#+begin_src emacs-lisp
+(map! :leader
+      (:prefix ("c" . "code")
+       :desc "Org babel detangle" "B" #'org-babel-detangle))
+#+end_src
+** Yasnippets
+*** Personnal snippets
+:mkdirp yes to create the file
+#+begin_src elisp
+# -*- mode: snippet -*-
+# name: elisp
+# key: elisp
+# uuid: elisp
+# --
+,#+begin_src emacs-lisp
+`%`$0
+`%`#+end_src
+#+end_src
+*** Org image width snippet
+#+begin_src elisp
+# -*- mode: snippet -*-
+# name: orgimagewidth
+# key: orgimw
+# uuid: orgimagewidth
+# --
+,#+attr_org: :width $0
+#+end_src
+*** Making documentation snippet
+
+#+begin_src emacs-lisp
+# -*- mode: snippet -*-
+# name: docu
+# key: docu
+# uuid: docu
+# expand-env: ((yas/indent-line 'fixed))
+# --
+,#+options: num:nil
+,#+setupfile: ./documentation/setup.conf
+,#+export_file_name: ./documentation/documentation.html
+
+,#+begin_src emacs-lisp :tangle ./documentation/setup.conf :mkdirp yes
+# -*- mode: org; -*-
+,#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/css/htmlize.css"/>
+,#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/css/readtheorg.css"/>
+,#+HTML_HEAD: <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+,#+HTML_HEAD: <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+,#+HTML_HEAD: <script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/lib/js/jquery.stickytableheaders.min.js"></script>
+,#+HTML_HEAD: <script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/js/readtheorg.js"></script>
+,#+HTML_HEAD: <style type="text/css">
+,#+HTML_HEAD: pre.src:hover:before { display: none; }
+,#+HTML_HEAD: </style>
+`%`#+end_src
+#+end_src
+*** Org Beamer snippets
+**** vspace snippet
+#+begin_src emacs-lisp
+# -*- mode: snippet -*-
+# name: vspace
+# key: vspace
+# uuid: vspace
+# expand-env: ((yas/indent-line 'fixed))
+# --
+,#+begin_export LaTeX
+\vspace{-$0em}
+,#+end_export
+#+end_src
+**** New slide snippet
+#+begin_src emacs-lisp
+# -*- mode: snippet -*-
+# name: newslide
+# key: newslide
+# uuid: newslide
+# expand-env: ((yas/indent-line 'fixed))
+# --
+`%`** ${1:Title}
+#+end_src
+**** New slide with image snippet
+#+begin_src emacs-lisp
+# -*- mode: snippet -*-
+# name: newslideimage
+# key: newslideimage
+# uuid: newslideimage
+# expand-env: ((yas/indent-line 'fixed))
+# --
+`%`** ${1:Title}
+,#+begin_export LaTeX
+\vspace{-1em}
+,#+end_export
+
+,#+caption: \centering ${2:caption}
+$0
+#+end_src
+**** New slide with 2 columns
+#+begin_src emacs-lisp
+# -*- mode: snippet -*-
+# name: newslide2col
+# key: newslide2col
+# uuid: newslide2col
+# expand-env: ((yas/indent-line 'fixed))
+# --
+`%`** ${1:Title}
+,#+begin_export LaTeX
+\vspace{1em}
+,#+end_export
+`%`**** Columns :B_columns:
+:PROPERTIES:
+:BEAMER_env: columns
+:END:
+,#+begin_export latex
+\hspace{1em}
+,#+end_export
+`%`***** col1 :BMCOL:
+:PROPERTIES:
+:BEAMER_col: 0.45
+:END:
+$0
+`%`***** col1 :BMCOL:
+:PROPERTIES:
+:BEAMER_col: 0.45
+:END:
+#+end_src
+**** New slide with block snippet
+#+begin_src emacs-lisp
+# -*- mode: snippet -*-
+# name: newslideblock
+# key: newslideblock
+# uuid: newslideblock
+# expand-env: ((yas/indent-line 'fixed))
+# --
+`%`** ${1:Title}
+`%`*** ${0:Block title}
+#+end_src
+**** New slide with image in block snippet
+#+begin_src emacs-lisp
+# -*- mode: snippet -*-
+# name: newslideblockimage
+# key: newslideblockimage
+# uuid: newslideblockimage
+# expand-env: ((yas/indent-line 'fixed))
+# --
+`%`** ${1:Title}
+,#+begin_export LaTeX
+\vspace{-2em}
+,#+end_export
+
+`%`*** ${2:Block title}
+,#+caption: \centering ${3:caption}
+$0
+#+end_src
+**** New slide with 2 columns
+#+begin_src emacs-lisp
+# -*- mode: snippet -*-
+# name: newslideblock2col
+# key: newslideblock2col
+# uuid: newslideblock2col
+# expand-env: ((yas/indent-line 'fixed))
+# --
+`%`** ${1:Title}
+`%`*** ${2:Block title}
+,#+begin_export LaTeX
+\vspace{1em}
+,#+end_export
+`%`**** Columns :B_columns:
+:PROPERTIES:
+:BEAMER_env: columns
+:END:
+,#+begin_export latex
+\hspace{1em}
+,#+end_export
+`%`***** col1 :BMCOL:
+:PROPERTIES:
+:BEAMER_col: 0.45
+:END:
+$0
+`%`***** col1 :BMCOL:
+:PROPERTIES:
+:BEAMER_col: 0.45
+:END:
+#+end_src
+**** Ref slide
+#+begin_src emacs-lisp
+# -*- mode: snippet -*-
+# name: refslide
+# key: refslide
+# uuid: refslide
+# expand-env: ((yas/indent-line 'fixed))
+# --
+`%`** References
+:PROPERTIES:
+:BEAMER_opt: allowframebreaks, fragile, label=
+:END:
+bibliographystyle:ieeetr
+bibliography:~/notes/bibliography/phd.bib
+#+end_src
+
+** Make rg work
+#+begin_src emacs-lisp
+(setq process-connection-type t)
+#+end_src
+* Packages
+:PROPERTIES:
+:header-args: :tangle ~/.doom.d/packages.el
+:END:
+** Comments
+:PROPERTIES:
+:VISIBILITY: folded
+:END:
+To install a package with Doom you must declare them here and run 'doom sync'
+on the command line, then restart Emacs for the changes to take effect -- or
+use 'M-x doom/reload'.
+
+To install SOME-PACKAGE from MELPA, ELPA or emacsmirror:
+(package! some-package)
+
+To install a package directly from a remote git repo, you must specify a
+`:recipe'. You'll find documentation on what `:recipe' accepts here:
+https://github.com/raxod502/straight.el#the-recipe-format
+(package! another-package
+ :recipe (:host github :repo "username/repo"))
+
+If the package you are trying to install does not contain a PACKAGENAME.el
+file, or is located in a subdirectory of the repo, you'll need to specify
+`:files' in the `:recipe':
+(package! this-package
+ :recipe (:host github :repo "username/repo"
+          :files ("some-file.el" "src/lisp/*.el")))
+
+If you'd like to disable a package included with Doom, you can do so here
+with the `:disable' property:
+(package! builtin-package :disable t)
+
+You can override the recipe of a built in package without having to specify
+all the properties for `:recipe'. These will inherit the rest of its recipe
+from Doom or MELPA/ELPA/Emacsmirror:
+(package! builtin-package :recipe (:nonrecursive t))
+(package! builtin-package-2 :recipe (:repo "myfork/package"))
+
+Specify a `:branch' to install a package from a particular branch or tag.
+This is required for some packages whose default branch isn't 'master' (which
+our package manager can't deal with; see raxod502/straight.el#279)
+(package! builtin-package :recipe (:branch "develop"))
+
+Use `:pin' to specify a particular commit to install.
+(package! builtin-package :pin "1a2b3c4d5e")
+
+Doom's packages are pinned to a specific commit and updated from release to
+release. The `unpin!' macro allows you to unpin single packages...
+(unpin! pinned-package)
+...or multiple packages
+(unpin! pinned-package another-pinned-package)
+...Or *all* packages (NOT RECOMMENDED; will likely break things)
+(unpin! t)
+** Basic
+#+begin_src elisp
+;; -*- no-byte-compile: t; -*-
+;;; $DOOMDIR/packages.el
+
+(package! evil-tutor)
+(package! pdf-tools)
+#+end_src
+
+** For org roam
+#+begin_src emacs-lisp
+(package! org-ref)
+(package! org-roam-bibtex
+  :recipe (:host github :repo "org-roam/org-roam-bibtex"))
+(package! helm-bibtex)
+#+end_src
+** For org roam ui
+#+begin_src elisp
+(package! org-roam-ui
+  :recipe (:host github :repo "org-roam/org-roam-ui" :files ("*.el" "out")))
+#+end_src
+** Doct (for better org captures)
+#+begin_src elisp
+(package! doct
+  :recipe (:host github :repo "progfolio/doct"))
+#+end_src
+** Org superstar
+#+begin_src emacs-lisp
+(package! org-superstar)
+#+end_src
+** Org super agenda
+#+begin_src emacs-lisp
+(package! org-super-agenda)
+#+end_src
+** Pass - for password management
+#+begin_src emacs-lisp
+(package! pass)
+#+end_src
+** Org auto tangle
+#+begin_src emacs-lisp
+(package! org-auto-tangle
+  :recipe (:host github :repo "yilkalargaw/org-auto-tangle"))
+#+end_src
+** Get ripgrep utility
+#+begin_src emacs-lisp
+(package! rg)
+#+end_src
+** Automatic preview of latex in org
+#+begin_src emacs-lisp
+(package! org-fragtog)
+#+end_src
+** Python package management
+#+begin_src emacs-lisp
+(package! pipenv)
+(package! sphinx-doc)
+(package! python-pytest)
+#+end_src
+** Elfeed score
+#+begin_src emacs-lisp
+(package! elfeed-score)
+#+end_src
