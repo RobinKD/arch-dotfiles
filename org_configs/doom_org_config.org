@@ -1,7 +1,7 @@
-# Created 2022-05-31 Tue 12:38
+# Created 2022-05-31 Tue 17:32
 #+options: author:nil prop:t
 #+title: Doom Config
-#+export_file_name: doom_org_config.org
+#+export_file_name: doom_config_public.org
 #+auto_tangle: t
 #+exclude_tags: noexport
 
@@ -1140,6 +1140,7 @@ browser defined by `browse-url-generic-program'."
 )
 #+end_src
 *** Magit for bare repo
+Removed bcs bare repos are worse with magit than basic repos
 #+begin_src emacs-lisp
 (defun ~/magit-process-environment (env)
   "Add GIT_DIR and GIT_WORK_TREE to ENV when in a special directory.
@@ -1170,6 +1171,31 @@ https://github.com/magit/magit/issues/460 (@cpitclaudel)."
 
 (advice-add 'magit-process-environment
             :filter-return #'~/magit-process-environment)
+#+end_src
+
+#+begin_src emacs-lisp
+(use-package! magit
+  :config
+  (setq magit-repository-directories '(("~/.dotfiles" . 0)
+                                       ("~/Documents/PhD/" . 0)
+                                       ("~/experiments/" . 0)
+                                       ("~/notes/" . 0)
+                                       ("~/customarch/" . 0))
+        magit-repolist-columns '(("Name" 25 magit-repolist-column-ident nil)
+                                 ("Untracked/Unstaged/Staged" 25 magit-repolist-column-flag)
+                                 ("B<U" 5 magit-repolist-column-unpulled-from-upstream
+                                  ((:right-align t)
+                                   (:sort <)))
+                                 ("B>U" 5 magit-repolist-column-unpushed-to-upstream
+                                  ((:right-align t)
+                                   (:sort <)))
+                                 ("Path" 99 magit-repolist-column-path nil))
+        magit-repolist-column-flag-alist
+        '((magit-staged-files . "S")
+          (magit-unstaged-files . "U")
+          (magit-untracked-files . "N"))
+        )
+  )
 #+end_src
 ** Tangle code blocks on hook
 #+begin_src emacs-lisp
