@@ -1,0 +1,9 @@
+[user]
+	email = robin.kd@protonmail.com
+	name = RobinKD
+[push]
+	default = simple
+[init]
+	defaultBranch = main
+[gpg]
+	program = gpg
