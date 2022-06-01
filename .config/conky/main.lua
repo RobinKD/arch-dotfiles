@@ -82,7 +82,7 @@ function conky_top_cpu_line(ord)
 
     return conky_parse(
         string.format(
-          T_ "${color}${lua font bold {%s}} ${font}${color}${goto $sr{156}}%s${alignr}${offset $sr{-44}}%s\n${voffset $sr{-13}}${alignr}%s",
+            T_ "%s ${font}${color}${goto $sr{156}}%s${alignr}${offset $sr{-54}}%s\n${voffset $sr{-13}}${alignr}%s",
             _t("name"),
             _t("pid"),
             _t("mem"),
@@ -93,7 +93,7 @@ end
 
 -- render top_mem line
 function conky_top_mem_line(ord)
-  local _H = T_ "${color3}${lua font h2 {PROCESS ${goto $sr{156}}PID ${goto $sr{205}}MEM% ${alignr}CPU%}}${font}${color}"
+  local _H = T_ "${color3}${lua font h2 {PROCESS ${goto $sr{156}}PID ${goto $sr{205}}CPU% ${alignr}MEM%}}${font}${color}"
     if ord == "header" then
         return conky_parse(_H)
     end
@@ -104,7 +104,7 @@ function conky_top_mem_line(ord)
 
     return conky_parse(
         string.format(
-            T_ "%s ${goto $sr{156}}%s${alignr}${offset $sr{-44}}%s\n${voffset $sr{-13}}${alignr}%s",
+            T_ "%s ${goto $sr{156}}%s${alignr}${offset $sr{-54}}%s\n${voffset $sr{-13}}${alignr}%s",
             _t("name"),
             _t("pid"),
             _t("cpu"),
